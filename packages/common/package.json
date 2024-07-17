@@ -1,0 +1,17 @@
+{
+  "name": "@repo/common",
+  "version": "1.0.0",
+  "private": true,
+  "exports": {
+    "./index": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "zod": "^3.23.8"
+  }
+}
