@@ -1,6 +1,5 @@
 import { Hono } from "hono";
 import { PrismaClient } from "@prisma/client/edge";
-import { verify } from "hono/jwt";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { createBlogInput, updateBlogInput } from '@repo/common/index';
 
@@ -13,22 +12,6 @@ export const blogRoutes = new Hono<{
      userId: number
  }
 }>();
-
-blogRoutes.use(async (c, next) => {
-     const jwt = c.req.header('Authorization');
-     if (!jwt) {
-          c.status(401);
-          return c.json({ error: "unauthorized" });
-     }
-     const token = jwt.split(' ')[1];
-     const payload = await verify(token, c.env.JWT_SECRET)
-     if (!payload) {
-          c.status(401);
-          return c.json({ error: "unauthorized" });
-     }
-     c.set('userId', Number(payload.userId));
-     await next();
-})
 
 blogRoutes.post('/', async (c) => {
      const body = await c.req.json();
@@ -86,6 +69,27 @@ blogRoutes.put('/:id', async (c) => {
      }
 })
 
+blogRoutes.delete('/:id', async (c) => {
+     const userId = c.get('userId');
+     const blogId = c.req.param('id');
+     const prisma = new PrismaClient({
+          datasourceUrl: c.env.DATABASE_URL
+     }).$extends(withAccelerate());
+     try {
+          await prisma.blog.delete({
+               where: {
+                    id: Number(blogId),
+                    authorId: userId,
+               }
+          })
+          c.status(200);
+          return c.text("Blog deleted successfully");
+     } catch (e) {
+          c.status(400);
+          return c.json({ error: e });
+     }
+})
+
 blogRoutes.get('/bulk', async (c) => {
 	const prisma = new PrismaClient({
           datasourceUrl: c.env?.DATABASE_URL
@@ -97,6 +101,7 @@ blogRoutes.get('/bulk', async (c) => {
                     title: true,
                     content: true,
                     publishDate: true,
+                    authorId: true,
                     author: {
                          select: {
                               name: true
@@ -127,6 +132,7 @@ blogRoutes.get('/:id', async (c) => {
                     title: true,
                     content: true,
                     publishDate: true,
+                    authorId: true,
                     author: {
                          select: {
                               name: true

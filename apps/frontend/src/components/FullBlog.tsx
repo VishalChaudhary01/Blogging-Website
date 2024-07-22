@@ -31,7 +31,7 @@ export const FullBlog = ({ blog }: {blog: Blog}) => {
                               </div>
                          </div>
                          <div className="pl-6">
-                              You can also use variant modifiers to target media queries like responsive breakpoints, dark mode, prefers-reduced-motion, and more. 
+                              This is dummy details of author, Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe quam autem expedita tempora eligendi non consectetur voluptas ab ullam magnam ipsam hic nisi illo recusandae earum, perferendis cumque deserunt a.
                          </div>
                     </div>
                </div>

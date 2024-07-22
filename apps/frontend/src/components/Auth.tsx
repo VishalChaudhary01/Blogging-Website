@@ -17,7 +17,8 @@ export const Auth = ({ type }: { type: "signin" | "signup"}) => {
                const response = await axios.post(`${BACKEND_URL}/api/v1/user/${type === "signin" ? "signin" : "signup"}`, userInfo)
                const jwt = response.data;
                localStorage.setItem("token", jwt);
-               navigate("/blogs");
+               navigate("/");
+               window.location.reload(); 
           } catch (e) {
                console.log(e);
                alert("Something went wrong")
@@ -25,7 +26,7 @@ export const Auth = ({ type }: { type: "signin" | "signup"}) => {
      }
 
      return (
-          <div className="h-screen flex flex-col justify-center">
+          <div className="h-[calc(100vh-66px)] flex flex-col justify-center">
                <div className="flex justify-center">
                     <div>
                          <div className="px-8 font-bold text-3xl">

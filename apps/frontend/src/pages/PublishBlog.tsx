@@ -1,7 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Appbar } from "../components/Appbar";
 import { BACKEND_URL } from "../config";
 
 export const PublishBlog = () => {
@@ -11,8 +10,7 @@ export const PublishBlog = () => {
 
   async function handleSubmit() {
      try {
-          console.log(localStorage.getItem("token"))
-          const response = await axios.post(`${BACKEND_URL}/api/v1/blog`, {
+          await axios.post(`${BACKEND_URL}/api/v1/blog`, {
                title,
                content
           },{
@@ -20,16 +18,14 @@ export const PublishBlog = () => {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                }
           });
-          navigate(`/blogs/${response.data.id}`)
+          navigate(`/profile`)
      } catch (e) {
           console.log("Error while publish", e)
-          alert(e)
      }
   }
 
   return (
     <div>
-      <Appbar />
       <div className="flex justify-center w-full">
         <div className="max-w-screen-lg w-full">
           <input

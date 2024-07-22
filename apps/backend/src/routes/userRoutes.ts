@@ -8,6 +8,9 @@ export const userRoutes = new Hono<{
      Bindings: {
           DATABASE_URL: string;
           JWT_SECRET: string;
+     },
+     Variables: {
+          userId: number
      }
 }>();
 
@@ -66,5 +69,29 @@ userRoutes.post("/signin", async (c) => {
           console.log(e);
           c.status(411);
           return c.text("Invalid Inputs");
+     }
+})
+
+userRoutes.get("/profile", async (c) => {
+     const userId = c.get('userId');
+     const prisma = new PrismaClient({
+          datasourceUrl: c.env.DATABASE_URL
+     }).$extends(withAccelerate());
+     try {
+          const userInfo = await prisma.user.findFirst({
+               where: {
+                    id: userId
+               },
+               select: {
+                    id: true,
+                    name: true,
+                    email: true,
+               }
+          })
+          return c.json(userInfo);
+     } catch (e) {
+          console.log(e);
+          c.status(400);
+          return c.json({ Error: e });
      }
 })

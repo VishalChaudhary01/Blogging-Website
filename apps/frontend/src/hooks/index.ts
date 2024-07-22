@@ -6,10 +6,43 @@ export interface Blog {
      "id": number;
      "title": string;
      "content": string;
+     "authorId": number;
      "author": {
           "name": string
      }
      "publishDate": string
+}
+
+export interface User {
+     "id": number;
+     "name": string;
+     "email": string;
+}
+
+export const useUserInfo = () => {
+     const [loading, setLoading] = useState(true);
+     const [userInfo, setUserInfo] = useState<User>();
+     useEffect (() => {
+          const fetchUser = async () => {
+               try {
+                    const response = await axios.get(`http://127.0.0.1:8787/api/v1/user/profile`, {
+                         headers: {
+                              Authorization: `Bearer ${localStorage.getItem("token")}`
+                         }
+                    })
+                    setUserInfo(response.data);
+               } catch (e) {
+                    console.error("Something went wrong:", e);
+               } finally {
+                    setLoading(false);
+               }    
+          }
+          fetchUser();
+     }, []);
+     return {
+          userInfo,
+          loading
+     }
 }
 
 export const useBlog = ({ id }: { id: string }) => {
@@ -25,7 +58,6 @@ export const useBlog = ({ id }: { id: string }) => {
                     })
                     setBlog(response.data);
                } catch (e) {
-                    alert(e)
                     console.error("Error While fetching blog:", e);
                } finally {
                     setLoading(false);
@@ -54,7 +86,6 @@ export const useBlogs = () => {
                     });
                     setBlogs(response.data);
                } catch (error) {
-                    alert(error)
                     console.error("Error While fetching blogs:", error);
                } finally {
                     setLoading(false);

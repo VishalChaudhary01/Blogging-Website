@@ -1,7 +1,7 @@
 
 export const Quote = () => {
      return (
-          <div className="bg-slate-100 h-screen flex flex-col justify-center">
+          <div className="bg-slate-100 h-[calc(100vh-65px)] flex flex-col justify-center">
                <div className="flex justify-center">
                     <div className="max-w-lg">
                          <div className="text-3xl font-bold">

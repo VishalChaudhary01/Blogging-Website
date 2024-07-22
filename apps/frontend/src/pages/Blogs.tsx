@@ -1,4 +1,3 @@
-import { Appbar } from "../components/Appbar";
 import { BlogCard } from "../components/BlogCard";
 import { useBlogs } from "../hooks";
 import { BlogCardSkeleton } from "../skeletons/BlogCardSkeleton";
@@ -8,7 +7,6 @@ export const BlogsPage = () => {
 
   return (
     <>
-      <Appbar />
       { loading? (
         <div>
           <BlogCardSkeleton />
