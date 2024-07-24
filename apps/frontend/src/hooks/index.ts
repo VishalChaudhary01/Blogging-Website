@@ -25,7 +25,7 @@ export const useUserInfo = () => {
      useEffect (() => {
           const fetchUser = async () => {
                try {
-                    const response = await axios.get(`http://127.0.0.1:8787/api/v1/user/profile`, {
+                    const response = await axios.get(`${BACKEND_URL}/api/v1/user/profile`, {
                          headers: {
                               Authorization: `Bearer ${localStorage.getItem("token")}`
                          }
