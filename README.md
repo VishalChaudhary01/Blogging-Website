@@ -1,16 +1,5 @@
-## CODTECH-Task2
 
-Name: VISHAL CHAUDHARY
-
-Company: CODTECH IT SOLUTIONS
-
-ID: CT6WDS432
-
-Domain: WEB DEVELOPMENT
-
-Duration: 15th JUNE to 30th JULY
-
-## Todo App
+## Blogging Website
 This is a blogging-app website where a user can create their account and then they can post their blogs or read others blog.
  
  - A user can Sign up
