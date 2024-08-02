@@ -1,7 +1,10 @@
 import { Blog } from "../hooks";
 import { Avatar } from "./Avatar";
+import DOMPurify from "dompurify";
 
 export const FullBlog = ({ blog }: {blog: Blog}) => {
+     const senitizedContent = DOMPurify.sanitize(blog.content);
+     
      return (
           <div className="flex fustify-center">
                <div className="grid grid-cols-3 px-20 pt-20 w-full max-w-screen-2xl">
@@ -13,9 +16,7 @@ export const FullBlog = ({ blog }: {blog: Blog}) => {
                               <div className="pt-2 text-gray-500 font-normal">
                                    {blog.publishDate.split('T')[0]}
                               </div>
-                              <div className="pt-2">
-                                   {blog.content}
-                              </div>
+                              <div dangerouslySetInnerHTML={{ __html: senitizedContent}} className="pt-2" />
                          </div>
                     </div>
                     <div className="pl-2 border-l">
