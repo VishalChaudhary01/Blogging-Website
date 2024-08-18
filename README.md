@@ -24,7 +24,7 @@ This is a blogging-app website where a user can create their account and then th
 
  **Turborepo** 
 ![Screenshot 2024-07-28 232959](https://github.com/user-attachments/assets/33198035-77ad-4179-96af-b99bf76967ba)
-![Screenshot 2024-07-28 233042](https://github.com/user-attachments/assets/22ce0da2-46b8-44d2-98df-d6626e0d7dd8)
+![Screenshot 2024-08-02 172740](https://github.com/user-attachments/assets/3ca0b51d-4935-47bd-845a-be4df6ed4dfd)
 ![Screenshot 2024-07-28 233105](https://github.com/user-attachments/assets/cd4a7638-0fe7-4575-a328-c79bb428bbf9)
 
  
